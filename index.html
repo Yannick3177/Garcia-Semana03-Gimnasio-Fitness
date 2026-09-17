@@ -1,121 +1,253 @@
-<!-- PASO 5: Formulario con Validación UI y Accesibilidad - Tema Gimnasio/Fitness -->
-<section id="inscripcion" class="py-5 bg-dark text-white">
-  <div class="container py-4">
-    <div class="row justify-content-center">
-      <div class="col-lg-8 col-md-10">
-        
-        <!-- Encabezado de la sección -->
-        <div class="text-center mb-5">
-          <h2 class="fw-bold display-5 text-warning">Únete a PowerGym OTI</h2>
-          <p class="lead text-light">Completa tus datos para registrarte en nuestra membresía o solicitar una rutina personalizada.</p>
-        </div>
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- PASO 1: Meta etiquetas SEO y configuración inicial -->
+  <meta name="description" content="PowerGym OTI - Elite Fitness Center & Training Performance.">
+  <meta name="keywords" content="gimnasio, fitness, pesas, membresías, rutinas, entrenamiento">
+  <meta name="author" content="Joshua Deivi Álvarez Cajaleón - UNCP">
+  <meta name="robots" content="index, follow">
 
-        <!-- Formulario con clases de Bootstrap y utilidades Tailwind -->
-        <form class="needs-validation p-4 p-md-5 rounded-xl bg-secondary bg-opacity-10 shadow-lg border border-secondary" novalidate>
-          
-          <!-- Campo Nombre Completo -->
-          <div class="mb-3">
-            <label for="nombreCompleto" class="form-label text-light fw-semibold">Nombre Completo</label>
-            <input 
-              type="text" 
-              class="form-control bg-dark text-white border-secondary" 
-              id="nombreCompleto" 
-              aria-describedby="nombreHelp nombreFeedback" 
-              required
-            >
-            <div id="nombreHelp" class="form-text text-muted">Ingresa tu nombre y apellido tal como figura en tu documento.</div>
-            <div id="nombreFeedback" class="invalid-feedback">
-              Por favor, ingresa un nombre válido.
-            </div>
-            <div class="valid-feedback">
-              ¡Excelente! Nombre correcto.
-            </div>
-          </div>
+  <title>PowerGym OTI | High-Performance Fitness</title>
 
-          <!-- Campo Correo Electrónico -->
-          <div class="mb-3">
-            <label for="correoElectronico" class="form-label text-light fw-semibold">Correo Electrónico</label>
-            <input 
-              type="email" 
-              class="form-control bg-dark text-white border-secondary" 
-              id="correoElectronico" 
-              aria-describedby="correoHelp correoFeedback" 
-              required
-            >
-            <div id="correoHelp" class="form-text text-muted">Nunca compartiremos tu correo con terceros.</div>
-            <div id="correoFeedback" class="invalid-feedback">
-              Por favor, introduce un correo electrónico válido (ej. usuario@correo.com).
-            </div>
-            <div class="valid-feedback">
-              ¡Correo electrónico válido!
-            </div>
-          </div>
+  <!-- PASO 1: CDNs oficiales (Bootstrap 5.3.3 y Tailwind Play CDN - Sin @import) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#0a0a0c',
+              card: '#121217',
+              accent: '#f59e0b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#0a0a0c] text-gray-100 antialiased selection:bg-amber-500 selection:text-black">
 
-          <!-- Selección de Membresía (Select) -->
-          <div class="mb-3">
-            <label for="tipoMembresia" class="form-label text-light fw-semibold">Selecciona tu Plan / Membresía</label>
-            <select 
-              class="form-select bg-dark text-white border-secondary" 
-              id="tipoMembresia" 
-              aria-describedby="membresiaFeedback" 
-              required
-            >
-              <option selected disabled value="">Elige una opción...</option>
-              <option value="basico">Plan Básico (Musculación)</option>
-              <option value="intermedio">Plan Full Fitness (Pesas + Cardio)</option>
-              <option value="vip">Plan VIP (Acceso Total + Entrenador Personal)</option>
-            </select>
-            <div id="membresiaFeedback" class="invalid-feedback">
-              Selecciona un plan de membresía disponible.
-            </div>
-            <div class="valid-feedback">
-              ¡Plan seleccionado correctamente!
-            </div>
-          </div>
+  <!-- PASO 2: Navbar Responsivo (Componentes + Utilidades y Badges) -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-[#0a0a0c]/90 fixed-top border-bottom border-white/10 py-3 backdrop-blur-md z-50">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-white tracking-wider d-flex align-items-center gap-2" href="#">
+        <span class="text-amber-400">POWER</span>GYM <span class="text-xs bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-full border border-amber-500/30">OTI</span>
+      </a>
+      
+      <button class="navbar-toggler border-white/20 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-          <!-- Comentarios / Objetivos de Entrenamiento -->
-          <div class="mb-4">
-            <label for="objetivosEntrenamiento" class="form-label text-light fw-semibold">Objetivos o Lesiones Previas (Opcional)</label>
-            <textarea 
-              class="form-control bg-dark text-white border-secondary" 
-              id="objetivosEntrenamiento" 
-              rows="3" 
-              aria-describedby="objetivosHelp"
-            ></textarea>
-            <div id="objetivosHelp" class="form-text text-muted">Cuéntanos brevemente qué deseas lograr en el gimnasio.</div>
-          </div>
-
-          <!-- Botón de Envío con Transición Tailwind y Accesibilidad -->
-          <div class="d-grid">
-            <button 
-              type="submit" 
-              class="btn btn-warning fw-bold text-dark py-3 rounded-lg shadow-md transition-transform hover:scale-105"
-            >
-              Inscribirme Ahora
-            </button>
-          </div>
-
-        </form>
-
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav align-items-lg-center gap-lg-3 mt-3 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link text-gray-300 hover:text-amber-400 transition-colors" href="#inicio">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-gray-300 hover:text-amber-400 transition-colors" href="#servicios">Servicios</a>
+          </li>
+          <!-- Menú desplegable (Dropdown) requerido -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-gray-300 hover:text-amber-400 transition-colors" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Membresías <span class="badge bg-amber-500 text-black ms-1 fw-bold fs-7">¡Nuevo!</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark bg-[#121217] border border-white/10 shadow-2xl rounded-xl mt-2">
+              <li><a class="dropdown-item py-2 text-gray-300 hover:text-amber-400 hover:bg-white/5" href="#inscripcion">Plan Básico</a></li>
+              <li><a class="dropdown-item py-2 text-gray-300 hover:text-amber-400 hover:bg-white/5" href="#inscripcion">Plan Full Fitness</a></li>
+              <li><hr class="dropdown-divider border-white/10"></li>
+              <li><a class="dropdown-item py-2 text-amber-400 fw-semibold hover:bg-amber-500/10" href="#inscripcion">Plan VIP Total</a></li>
+            </ul>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a href="#inscripcion" class="btn bg-amber-500 hover:bg-amber-600 text-black fw-bold px-4 py-2 rounded-xl transition-all shadow-lg shadow-amber-500/20 border-0">Únete Ahora</a>
+          </li>
+        </ul>
       </div>
     </div>
-  </div>
-</section>
+  </nav>
 
-<!-- Script ligero de Bootstrap para activar el comportamiento de validación visual de la UI -->
-<script>
-  (function () {
-    'use strict'
-    var forms = document.querySelectorAll('.needs-validation')
-    Array.prototype.slice.call(forms)
-      .forEach(function (form) {
-        form.addEventListener('submit', function (event) {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          }
-          form.classList.add('was-validated')
-        }, false)
-      })
-  })()
-</script>
+  <!-- PASO 3: Hero Section (Tipografía Fluida y Composición Híbrida) -->
+  <header id="inicio" class="min-vh-100 d-flex align-items-center position-relative pt-5 overflow-hidden">
+    <!-- Fondo con gradiente y efecto de luz -->
+    <div class="absolute inset-0 bg-gradient-to-b from-amber-500/5 via-[#0a0a0c] to-[#0a0a0c] pointer-events-none"></div>
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-amber-500/10 blur-[130px] rounded-full pointer-events-none"></div>
+
+    <div class="container position-relative z-10 py-5 mt-5">
+      <div class="row justify-content-center text-center">
+        <div class="col-lg-9">
+          <span class="text-amber-400 font-semibold tracking-widest text-xs uppercase bg-amber-500/10 px-3 py-1.5 rounded-full border border-amber-500/20 d-inline-block mb-4">Centro de Alto Rendimiento OTI</span>
+          
+          <h1 class="display-3 fw-bold text-white tracking-tight mb-4 text-balance">
+            Transforma Tu Cuerpo, <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">Supera Tus Límites</span>
+          </h1>
+          
+          <p class="lead text-gray-400 max-w-3xl mx-auto fs-5 mb-5 text-balance">
+            Entrena con equipos de última generación, rutinas diseñadas por expertos y un ambiente exclusivo creado para alcanzar tu máxima versión física.
+          </p>
+
+          <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a href="#inscripcion" class="btn bg-amber-500 hover:bg-amber-600 text-black fw-bold px-5 py-3.5 rounded-xl shadow-lg shadow-amber-500/20 transition-all hover:scale-105 border-0">
+              Comenzar Membresía
+            </a>
+            <a href="#servicios" class="btn bg-white/5 hover:bg-white/10 text-white fw-semibold px-5 py-3.5 rounded-xl border border-white/10 transition-all">
+              Explorar Rutinas
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PASO 4: Grid de Tarjetas (Sistema de 12 Columnas + Diseño de Vanguardia) -->
+  <section id="servicios" class="py-24 relative overflow-hidden border-t border-white/5">
+    <div class="container py-4 relative z-10">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-amber-400 font-semibold tracking-widest text-xs uppercase bg-amber-500/10 px-3 py-1.5 rounded-full border border-amber-500/20">Experiencia de Élite</span>
+        <h2 class="fw-bold display-5 mt-3 mb-3 tracking-tight text-white">Nuestros Servicios y Planes</h2>
+        <p class="text-gray-400 lead fs-6">Diseñado con tecnología de punta y equipamiento profesional para llevar tu rendimiento al siguiente nivel.</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Tarjeta 1 -->
+        <div class="col-md-4">
+          <div class="card h-100 bg-[#121217]/80 backdrop-blur-md border border-white/10 text-white rounded-2xl p-2 transition-all duration-300 hover:-translate-y-2 hover:border-amber-500/50 hover:shadow-2xl hover:shadow-amber-500/10">
+            <div class="card-body p-4 d-flex flex-column">
+              <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-4 font-bold text-lg">01</div>
+              <h3 class="h4 fw-bold text-white mb-3">Musculación y Fuerza</h3>
+              <p class="text-gray-400 flex-grow-1 small lh-base">Zonas equipadas con plataformas olímpicas, mancuernas de alta densidad y racks de potencia profesionales.</p>
+              <div class="pt-4 mt-auto border-t border-white/5">
+                <a href="#inscripcion" class="text-amber-400 fw-semibold text-decoration-none d-inline-flex align-items-center gap-2 hover:text-amber-300 transition-colors">
+                  Reservar Área <span class="fs-5">→</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 2 -->
+        <div class="col-md-4">
+          <div class="card h-100 bg-[#121217]/80 backdrop-blur-md border border-white/10 text-white rounded-2xl p-2 transition-all duration-300 hover:-translate-y-2 hover:border-amber-500/50 hover:shadow-2xl hover:shadow-amber-500/10">
+            <div class="card-body p-4 d-flex flex-column">
+              <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-4 font-bold text-lg">02</div>
+              <h3 class="h4 fw-bold text-white mb-3">Cardio & Condición</h3>
+              <p class="text-gray-400 flex-grow-1 small lh-base">Optimiza tu resistencia cardiovascular con trotadoras inteligentes, elípticas de última generación y equipos ergométricos.</p>
+              <div class="pt-4 mt-auto border-t border-white/5">
+                <a href="#inscripcion" class="text-amber-400 fw-semibold text-decoration-none d-inline-flex align-items-center gap-2 hover:text-amber-300 transition-colors">
+                  Ver Programas <span class="fs-5">→</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 3 -->
+        <div class="col-md-4">
+          <div class="card h-100 bg-[#121217]/80 backdrop-blur-md border border-white/10 text-white rounded-2xl p-2 transition-all duration-300 hover:-translate-y-2 hover:border-amber-500/50 hover:shadow-2xl hover:shadow-amber-500/10">
+            <div class="card-body p-4 d-flex flex-column">
+              <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-4 font-bold text-lg">03</div>
+              <h3 class="h4 fw-bold text-white mb-3">Asesoría Personal</h3>
+              <p class="text-gray-400 flex-grow-1 small lh-base">Planes de entrenamiento personalizados y seguimiento biométrico guiado por entrenadores certificados.</p>
+              <div class="pt-4 mt-auto border-t border-white/5">
+                <a href="#inscripcion" class="text-amber-400 fw-semibold text-decoration-none d-inline-flex align-items-center gap-2 hover:text-amber-300 transition-colors">
+                  Consultar Co-Coach <span class="fs-5">→</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PASO 5: Formulario con Validación UI, Accesibilidad y Diseño Profesional -->
+  <section id="inscripcion" class="py-24 bg-[#0d0d12] relative border-t border-white/5">
+    <div class="container py-4 relative z-10">
+      <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9">
+          
+          <div class="text-center mb-12">
+            <h2 class="fw-bold display-5 text-white tracking-tight">Comienza Tu Transformación</h2>
+            <p class="text-gray-400 mt-2">Completa tus datos para activar tu membresía exclusiva en PowerGym OTI.</p>
+          </div>
+
+          <form class="needs-validation p-4 p-md-5 rounded-2xl bg-[#121217] border border-white/10 shadow-2xl" novalidate>
+            <!-- Campo Nombre Completo -->
+            <div class="mb-4">
+              <label for="nombreCompleto" class="form-label text-gray-300 fw-medium small mb-2">Nombre Completo</label>
+              <input type="text" class="form-control bg-[#0a0a0c] text-white border-white/10 py-3 px-4 rounded-xl focus:bg-[#0a0a0c] focus:text-white focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 shadow-none" id="nombreCompleto" aria-describedby="nombreHelp nombreFeedback" placeholder="Ej. Juan Pérez" required>
+              <div id="nombreHelp" class="form-text text-gray-500 fs-7 mt-1">Ingresa tu nombre y apellido tal como figura en tu documento.</div>
+              <div id="nombreFeedback" class="invalid-feedback text-amber-400 small mt-1">Por favor, ingresa un nombre válido.</div>
+              <div class="valid-feedback text-emerald-400 small mt-1">¡Excelente! Campo verificado.</div>
+            </div>
+
+            <!-- Campo Correo Electrónico -->
+            <div class="mb-4">
+              <label for="correoElectronico" class="form-label text-gray-300 fw-medium small mb-2">Correo Electrónico</label>
+              <input type="email" class="form-control bg-[#0a0a0c] text-white border-white/10 py-3 px-4 rounded-xl focus:bg-[#0a0a0c] focus:text-white focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 shadow-none" id="correoElectronico" aria-describedby="correoHelp correoFeedback" placeholder="usuario@correo.com" required>
+              <div id="correoHelp" class="form-text text-gray-500 fs-7 mt-1">Nunca compartiremos tu información personal.</div>
+              <div id="correoFeedback" class="invalid-feedback text-amber-400 small mt-1">Introduce un correo electrónico con formato válido.</div>
+              <div class="valid-feedback text-emerald-400 small mt-1">¡Correo electrónico válido!</div>
+            </div>
+
+            <!-- Selección de Membresía -->
+            <div class="mb-4">
+              <label for="tipoMembresia" class="form-label text-gray-300 fw-medium small mb-2">Selecciona tu Plan / Membresía</label>
+              <select class="form-select bg-[#0a0a0c] text-white border-white/10 py-3 px-4 rounded-xl focus:bg-[#0a0a0c] focus:text-white focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 shadow-none" id="tipoMembresia" aria-describedby="membresiaFeedback" required>
+                <option selected disabled value="">Elige una opción corporativa...</option>
+                <option value="basico">Plan Básico - Área de Musculación</option>
+                <option value="intermedio">Plan Full Fitness - Musculación + Cardio</option>
+                <option value="vip">Plan VIP - Acceso Total + Entrenador Personal</option>
+              </select>
+              <div id="membresiaFeedback" class="invalid-feedback text-amber-400 small mt-1">Por favor, selecciona una membresía disponible.</div>
+              <div class="valid-feedback text-emerald-400 small mt-1">¡Plan seleccionado correctamente!</div>
+            </div>
+
+            <!-- Objetivos o Lesiones Previas -->
+            <div class="mb-5">
+              <label for="objetivosEntrenamiento" class="form-label text-gray-300 fw-medium small mb-2">Objetivos o Lesiones Previas (Opcional)</label>
+              <textarea class="form-control bg-[#0a0a0c] text-white border-white/10 py-3 px-4 rounded-xl focus:bg-[#0a0a0c] focus:text-white focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 shadow-none" id="objetivosEntrenamiento" rows="3" aria-describedby="objetivosHelp" placeholder="Cuéntanos brevemente qué deseas lograr..."></textarea>
+              <div id="objetivosHelp" class="form-text text-gray-500 fs-7 mt-1">Información útil para calibrar tu rutina inicial.</div>
+            </div>
+
+            <!-- Botón de Envío -->
+            <div class="d-grid">
+              <button type="submit" class="btn bg-amber-500 hover:bg-amber-600 text-black fw-bold py-3.5 rounded-xl shadow-lg shadow-amber-500/20 transition-all duration-300 hover:scale-[1.01] border-0">
+                Confirmar Inscripción
+              </button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script>
+    (function () {
+      'use strict'
+      var forms = document.querySelectorAll('.needs-validation')
+      Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+          form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+            form.classList.add('was-validated')
+          }, false)
+        })
+    })()
+  </script>
+</body>
+</html>
