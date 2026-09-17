@@ -1,0 +1,121 @@
+<!-- PASO 5: Formulario con Validación UI y Accesibilidad - Tema Gimnasio/Fitness -->
+<section id="inscripcion" class="py-5 bg-dark text-white">
+  <div class="container py-4">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10">
+        
+        <!-- Encabezado de la sección -->
+        <div class="text-center mb-5">
+          <h2 class="fw-bold display-5 text-warning">Únete a PowerGym OTI</h2>
+          <p class="lead text-light">Completa tus datos para registrarte en nuestra membresía o solicitar una rutina personalizada.</p>
+        </div>
+
+        <!-- Formulario con clases de Bootstrap y utilidades Tailwind -->
+        <form class="needs-validation p-4 p-md-5 rounded-xl bg-secondary bg-opacity-10 shadow-lg border border-secondary" novalidate>
+          
+          <!-- Campo Nombre Completo -->
+          <div class="mb-3">
+            <label for="nombreCompleto" class="form-label text-light fw-semibold">Nombre Completo</label>
+            <input 
+              type="text" 
+              class="form-control bg-dark text-white border-secondary" 
+              id="nombreCompleto" 
+              aria-describedby="nombreHelp nombreFeedback" 
+              required
+            >
+            <div id="nombreHelp" class="form-text text-muted">Ingresa tu nombre y apellido tal como figura en tu documento.</div>
+            <div id="nombreFeedback" class="invalid-feedback">
+              Por favor, ingresa un nombre válido.
+            </div>
+            <div class="valid-feedback">
+              ¡Excelente! Nombre correcto.
+            </div>
+          </div>
+
+          <!-- Campo Correo Electrónico -->
+          <div class="mb-3">
+            <label for="correoElectronico" class="form-label text-light fw-semibold">Correo Electrónico</label>
+            <input 
+              type="email" 
+              class="form-control bg-dark text-white border-secondary" 
+              id="correoElectronico" 
+              aria-describedby="correoHelp correoFeedback" 
+              required
+            >
+            <div id="correoHelp" class="form-text text-muted">Nunca compartiremos tu correo con terceros.</div>
+            <div id="correoFeedback" class="invalid-feedback">
+              Por favor, introduce un correo electrónico válido (ej. usuario@correo.com).
+            </div>
+            <div class="valid-feedback">
+              ¡Correo electrónico válido!
+            </div>
+          </div>
+
+          <!-- Selección de Membresía (Select) -->
+          <div class="mb-3">
+            <label for="tipoMembresia" class="form-label text-light fw-semibold">Selecciona tu Plan / Membresía</label>
+            <select 
+              class="form-select bg-dark text-white border-secondary" 
+              id="tipoMembresia" 
+              aria-describedby="membresiaFeedback" 
+              required
+            >
+              <option selected disabled value="">Elige una opción...</option>
+              <option value="basico">Plan Básico (Musculación)</option>
+              <option value="intermedio">Plan Full Fitness (Pesas + Cardio)</option>
+              <option value="vip">Plan VIP (Acceso Total + Entrenador Personal)</option>
+            </select>
+            <div id="membresiaFeedback" class="invalid-feedback">
+              Selecciona un plan de membresía disponible.
+            </div>
+            <div class="valid-feedback">
+              ¡Plan seleccionado correctamente!
+            </div>
+          </div>
+
+          <!-- Comentarios / Objetivos de Entrenamiento -->
+          <div class="mb-4">
+            <label for="objetivosEntrenamiento" class="form-label text-light fw-semibold">Objetivos o Lesiones Previas (Opcional)</label>
+            <textarea 
+              class="form-control bg-dark text-white border-secondary" 
+              id="objetivosEntrenamiento" 
+              rows="3" 
+              aria-describedby="objetivosHelp"
+            ></textarea>
+            <div id="objetivosHelp" class="form-text text-muted">Cuéntanos brevemente qué deseas lograr en el gimnasio.</div>
+          </div>
+
+          <!-- Botón de Envío con Transición Tailwind y Accesibilidad -->
+          <div class="d-grid">
+            <button 
+              type="submit" 
+              class="btn btn-warning fw-bold text-dark py-3 rounded-lg shadow-md transition-transform hover:scale-105"
+            >
+              Inscribirme Ahora
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Script ligero de Bootstrap para activar el comportamiento de validación visual de la UI -->
+<script>
+  (function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+</script>
