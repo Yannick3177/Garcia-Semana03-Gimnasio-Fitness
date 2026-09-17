@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- PASO 1: Meta etiquetas SEO y configuración inicial -->
   <meta name="description" content="PowerGym OTI - Elite Fitness Center & High-Performance Training.">
   <meta name="keywords" content="gimnasio, fitness, pesas, membresías, rutinas, entrenamiento de alto rendimiento">
   <meta name="author" content="Joshua Deivi Álvarez Cajaleón - UNCP">
@@ -12,7 +11,6 @@
 
   <title>PowerGym OTI | High-Performance Fitness Center</title>
 
-  <!-- PASO 1: CDNs oficiales (Bootstrap 5.3.3 y Tailwind Play CDN) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <script src="https://cdn.tailwindcss.com"></script>
   
@@ -22,164 +20,420 @@
         extend: {
           colors: {
             brand: {
-              dark: '#070709',
-              card: '#0f0f13',
+              dark: '#050507',
+              card: '#0c0c10',
               accent: '#f59e0b',
+              glow: '#fbbf24'
             }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif']
           }
         }
       }
     }
   </script>
-</head>
-<body class="bg-[#070709] text-gray-100 antialiased selection:bg-amber-500 selection:text-black">
 
-  <!-- PASO 2: Navbar Responsivo Pro (Efecto Glassmorphism Avanzado) -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-[#070709]/80 fixed-top border-bottom border-white/10 py-3.5 backdrop-blur-xl z-50 transition-all duration-300">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      --amber: #f59e0b;
+      --bg: #050507;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+    }
+
+    /* Navbar */
+    .navbar-premium {
+      background: rgba(5, 5, 7, 0.7) !important;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .navbar-premium.scrolled {
+      background: rgba(5, 5, 7, 0.94) !important;
+      box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.7);
+      border-bottom-color: rgba(245, 158, 11, 0.12);
+    }
+
+    .brand-text span:first-child {
+      position: relative;
+    }
+    .brand-text span:first-child::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--amber), transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .navbar-brand:hover .brand-text span:first-child::after {
+      transform: scaleX(1);
+    }
+
+    .dropdown-menu-premium {
+      background: rgba(12, 12, 16, 0.96) !important;
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+      animation: dropdownFade 0.25s ease;
+    }
+    @keyframes dropdownFade {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .dropdown-item:hover, .dropdown-item:focus {
+      background: rgba(245, 158, 11, 0.08) !important;
+      color: #fbbf24 !important;
+      padding-left: 1.15rem !important;
+    }
+
+    /* Hero con imagen de fondo */
+    .hero-section {
+      background-image: 
+        linear-gradient(180deg, rgba(5,5,7,0.75) 0%, rgba(5,5,7,0.85) 50%, rgba(5,5,7,0.95) 100%),
+        url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      animation: orbFloat 12s ease-in-out infinite;
+    }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+      50% { transform: translate(30px, -20px) scale(1.08); opacity: 0.75; }
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 40%, #ea580c 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .metric-item {
+      transition: transform 0.3s ease;
+    }
+    .metric-item:hover {
+      transform: translateY(-4px);
+    }
+
+    /* Service cards con imagen */
+    .service-card {
+      background: linear-gradient(165deg, rgba(14, 14, 20, 0.95) 0%, rgba(8, 8, 12, 0.98) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(245, 158, 11, 0.4);
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.55), 0 0 30px -8px rgba(245, 158, 11, 0.25);
+    }
+    .service-img {
+      height: 160px;
+      object-fit: cover;
+      width: 100%;
+      transition: transform 0.5s ease;
+    }
+    .service-card:hover .service-img {
+      transform: scale(1.06);
+    }
+    .service-number {
+      transition: all 0.35s ease;
+    }
+    .service-card:hover .service-number {
+      background: #f59e0b;
+      color: #000;
+      border-color: #f59e0b;
+      box-shadow: 0 0 18px rgba(245, 158, 11, 0.45);
+    }
+    .service-card:hover .service-link span {
+      transform: translateX(6px);
+    }
+
+    /* Form */
+    .form-premium {
+      background: linear-gradient(180deg, rgba(14, 14, 20, 0.95) 0%, rgba(10, 10, 14, 0.98) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+    }
+    .form-control, .form-select {
+      background-color: rgba(5, 5, 7, 0.75) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      color: #f3f4f6 !important;
+      transition: all 0.25s ease !important;
+    }
+    .form-control:focus, .form-select:focus {
+      background-color: rgba(5, 5, 7, 0.9) !important;
+      border-color: rgba(245, 158, 11, 0.55) !important;
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15) !important;
+    }
+    .form-control::placeholder {
+      color: rgba(156, 163, 175, 0.55);
+    }
+    .form-select option {
+      background: #0c0c10;
+      color: #f3f4f6;
+    }
+
+    /* Buttons */
+    .btn-primary-premium {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: #000;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-primary-premium::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.18), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .btn-primary-premium:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px -8px rgba(245, 158, 11, 0.5);
+      color: #000;
+    }
+    .btn-primary-premium:hover::after {
+      opacity: 1;
+    }
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      transition: all 0.3s ease;
+    }
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    .badge-live::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #fbbf24;
+      animation: pulse-dot 1.8s ease-in-out infinite;
+      display: inline-block;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.5); }
+      50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(251, 191, 36, 0); }
+    }
+
+    /* Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1), transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    footer {
+      background: linear-gradient(180deg, #050507 0%, #030304 100%);
+    }
+
+    ::selection {
+      background: #f59e0b;
+      color: #000;
+    }
+
+    .navbar-toggler:focus {
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.25);
+    }
+
+    /* Menos espacio entre bloques */
+    .section-tight {
+      padding-top: 4.5rem;
+      padding-bottom: 4.5rem;
+    }
+  </style>
+</head>
+<body class="bg-[#050507] text-gray-100 antialiased">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-premium fixed-top py-3 z-50">
     <div class="container">
-      <a class="navbar-brand fw-bold text-white tracking-wider d-flex align-items-center gap-2 m-0" href="#">
+      <a class="navbar-brand fw-bold text-white tracking-wider d-flex align-items-center gap-2 m-0 brand-text" href="#">
         <span class="text-amber-400">POWER</span>GYM 
-        <span class="text-[10px] tracking-widest uppercase bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded-full border border-amber-500/30">OTI Elite</span>
+        <span class="text-[10px] tracking-widest uppercase bg-amber-500/10 text-amber-400 px-2.5 py-0.5 rounded-full border border-amber-500/25 font-semibold">OTI Elite</span>
       </a>
       
-      <button class="navbar-toggler border-white/20 shadow-none p-2 rounded-xl bg-white/5" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler border-white/15 shadow-none p-2 rounded-xl bg-white/5 hover:bg-white/10 transition-colors" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav align-items-lg-center gap-lg-4 mt-3 mt-lg-0">
+        <ul class="navbar-nav align-items-lg-center gap-lg-1 mt-3 mt-lg-0">
           <li class="nav-item">
-            <a class="nav-link text-gray-300 hover:text-amber-400 transition-colors fw-medium fs-6" href="#inicio">Inicio</a>
+            <a class="nav-link text-gray-300 hover:text-amber-400 transition-colors fw-medium px-3 py-2 rounded-lg hover:bg-white/5" href="#inicio">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-gray-300 hover:text-amber-400 transition-colors fw-medium fs-6" href="#servicios">Servicios</a>
+            <a class="nav-link text-gray-300 hover:text-amber-400 transition-colors fw-medium px-3 py-2 rounded-lg hover:bg-white/5" href="#servicios">Servicios</a>
           </li>
-          <!-- Dropdown Profesional -->
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-gray-300 hover:text-amber-400 transition-colors fw-medium fs-6 d-flex align-items-center gap-1" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Membresías <span class="badge bg-amber-500 text-black ms-1 fw-bold text-[10px] uppercase">PRO</span>
+            <a class="nav-link dropdown-toggle text-gray-300 hover:text-amber-400 transition-colors fw-medium px-3 py-2 rounded-lg hover:bg-white/5 d-flex align-items-center gap-1" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Membresías <span class="badge bg-amber-500 text-black ms-1 fw-bold text-[10px] uppercase tracking-wide">PRO</span>
             </a>
-            <ul class="dropdown-menu dropdown-menu-dark bg-[#0f0f13] border border-white/10 shadow-2xl rounded-2xl mt-3 p-2">
-              <li><a class="dropdown-item py-2.5 px-3 rounded-xl text-gray-300 hover:text-amber-400 hover:bg-white/5 transition-all" href="#inscripcion">Plan Básico Musculación</a></li>
-              <li><a class="dropdown-item py-2.5 px-3 rounded-xl text-gray-300 hover:text-amber-400 hover:bg-white/5 transition-all" href="#inscripcion">Plan Full Fitness & Cardio</a></li>
+            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-premium rounded-2xl mt-3 p-2 min-w-[260px]">
+              <li><a class="dropdown-item py-2.5 px-3 rounded-xl text-gray-300" href="#inscripcion">Plan Básico Musculación</a></li>
+              <li><a class="dropdown-item py-2.5 px-3 rounded-xl text-gray-300" href="#inscripcion">Plan Full Fitness & Cardio</a></li>
               <li><hr class="dropdown-divider border-white/10 my-2"></li>
-              <li><a class="dropdown-item py-2.5 px-3 rounded-xl text-amber-400 fw-bold hover:bg-amber-500/10 transition-all" href="#inscripcion">Plan VIP Total Experience</a></li>
+              <li><a class="dropdown-item py-2.5 px-3 rounded-xl text-amber-400 fw-semibold" href="#inscripcion">Plan VIP Total Experience</a></li>
             </ul>
           </li>
-          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
-            <a href="#inscripcion" class="btn bg-amber-500 hover:bg-amber-400 text-black fw-bold px-4 py-2.5 rounded-xl transition-all shadow-lg shadow-amber-500/20 border-0 d-block text-center">Unirse Ahora</a>
+          <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+            <a href="#inscripcion" class="btn btn-primary-premium fw-bold px-4 py-2.5 rounded-xl shadow-lg shadow-amber-500/20 d-block text-center">Unirse Ahora</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- PASO 3: Hero Section de Impacto Visual A1 -->
-  <header id="inicio" class="min-vh-100 d-flex align-items-center position-relative pt-5 overflow-hidden">
-    <!-- Luces ambientales de fondo -->
-    <div class="absolute inset-0 bg-gradient-to-b from-amber-500/10 via-[#070709] to-[#070709] pointer-events-none"></div>
-    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-amber-500/15 blur-[160px] rounded-full pointer-events-none"></div>
+  <!-- Hero -->
+  <header id="inicio" class="min-vh-100 d-flex align-items-center position-relative pt-5 overflow-hidden hero-section">
+    <div class="hero-orb top-1/4 left-1/2 -translate-x-1/2 w-[480px] h-[480px] bg-amber-500/15"></div>
+    <div class="hero-orb bottom-1/4 right-1/4 w-[260px] h-[260px] bg-orange-600/10" style="animation-delay: -4s;"></div>
 
-    <div class="container position-relative z-10 py-5 mt-5">
+    <div class="container position-relative z-10 py-4 mt-4">
       <div class="row justify-content-center text-center">
-        <div class="col-lg-10">
-          <div class="inline-flex align-items-center gap-2 bg-amber-500/10 border border-amber-500/20 px-3.5 py-1.5 rounded-full mb-4">
-            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-            <span class="text-amber-400 font-semibold tracking-wider text-xs uppercase">Tecnología de Vanguardia Aplicada al Fitness</span>
+        <div class="col-lg-10 reveal">
+          <div class="inline-flex align-items-center gap-2 bg-amber-500/10 border border-amber-500/20 px-4 py-1.5 rounded-full mb-4 badge-live">
+            <span class="text-amber-400 font-semibold tracking-widest text-xs uppercase">Tecnología de Vanguardia Aplicada al Fitness</span>
           </div>
           
-          <h1 class="display-3 fw-bold text-white tracking-tight mb-4 text-balance lh-1">
+          <h1 class="display-3 fw-bold text-white tracking-tight mb-3 text-balance lh-1" style="letter-spacing: -0.03em;">
             Diseña Tu Cuerpo, <br>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500">Domina Tu Rendimiento</span>
+            <span class="text-gradient">Domina Tu Rendimiento</span>
           </h1>
           
-          <p class="lead text-gray-400 max-w-2xl mx-auto fs-5 mb-5 text-balance lh-base">
-            Bienvenido al centro de entrenamiento de la Oficina de Tecnologías. Equipamiento inteligente, métricas avanzadas y un entorno de máxima exigencia.
+          <p class="lead text-gray-300 max-w-2xl mx-auto fs-5 mb-4 text-balance lh-base">
+            Bienvenido a <strong class="text-amber-400">IronVault OTI</strong> — el laboratorio de alto rendimiento donde se forja el físico de élite. Equipamiento inteligente, métricas en tiempo real y un entorno de máxima exigencia.
           </p>
 
           <div class="d-flex flex-wrap justify-content-center gap-3">
-            <a href="#inscripcion" class="btn bg-amber-500 hover:bg-amber-400 text-black fw-bold px-5 py-3.5 rounded-xl shadow-xl shadow-amber-500/20 transition-all hover:scale-105 border-0 d-inline-flex align-items-center gap-2">
-              Iniciar Membresía <span>→</span>
+            <a href="#inscripcion" class="btn btn-primary-premium fw-bold px-5 py-3 rounded-xl shadow-xl shadow-amber-500/25 d-inline-flex align-items-center gap-2">
+              Iniciar Membresía <span class="fw-normal">→</span>
             </a>
-            <a href="#servicios" class="btn bg-white/5 hover:bg-white/10 text-white fw-semibold px-5 py-3.5 rounded-xl border border-white/10 transition-all backdrop-blur-md">
+            <a href="#servicios" class="btn btn-ghost fw-semibold px-5 py-3 rounded-xl backdrop-blur-md">
               Explorar Áreas
             </a>
           </div>
 
-          <!-- Métricas rápidas de confianza -->
-          <div class="row g-4 mt-5 pt-5 border-top border-white/10 max-w-4xl mx-auto text-start">
-            <div class="col-4 text-center">
+          <div class="row g-3 mt-4 pt-4 border-top border-white/10 max-w-3xl mx-auto">
+            <div class="col-4 text-center metric-item">
               <div class="display-6 fw-bold text-white">100%</div>
               <div class="text-gray-500 small text-uppercase tracking-wider mt-1">Equipamiento Pro</div>
             </div>
-            <div class="col-4 text-center border-x border-white/10">
+            <div class="col-4 text-center border-x border-white/10 metric-item">
               <div class="display-6 fw-bold text-amber-400">24/7</div>
               <div class="text-gray-500 small text-uppercase tracking-wider mt-1">Acceso Inteligente</div>
             </div>
-            <div class="col-4 text-center">
+            <div class="col-4 text-center metric-item">
               <div class="display-6 fw-bold text-white">A1</div>
               <div class="text-gray-500 small text-uppercase tracking-wider mt-1">Estándar OTI</div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
   </header>
 
-  <!-- PASO 4: Grid de Tarjetas Estilo "Bento Grid / Neón Sutil" -->
-  <section id="servicios" class="py-24 relative overflow-hidden border-t border-white/5 bg-[#070709]">
-    <div class="container py-4 relative z-10">
-      
-      <div class="text-center max-w-2xl mx-auto mb-16">
-        <span class="text-amber-400 font-semibold tracking-widest text-xs uppercase bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/20">Inf్రాestructura de Élite</span>
-        <h2 class="fw-bold display-5 mt-3 mb-3 tracking-tight text-white">Áreas de Entrenamiento Especializadas</h2>
-        <p class="text-gray-400 lead fs-6">Espacios optimizados biomecánicamente para maximizar cada sesión de esfuerzo físico.</p>
+  <!-- Servicios -->
+  <section id="servicios" class="section-tight relative overflow-hidden border-t border-white/5">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-amber-500/5 blur-[100px] rounded-full pointer-events-none"></div>
+
+    <div class="container relative z-10">
+      <div class="text-center max-w-2xl mx-auto mb-10 reveal">
+        <span class="text-amber-400 font-semibold tracking-widest text-xs uppercase bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/20">Infraestructura de Élite</span>
+        <h2 class="fw-bold display-5 mt-3 mb-2 tracking-tight text-white" style="letter-spacing: -0.025em;">Áreas de Entrenamiento Especializadas</h2>
+        <p class="text-gray-400 lead fs-6 mb-0">Espacios optimizados biomecánicamente para maximizar cada sesión de esfuerzo físico.</p>
       </div>
 
       <div class="row g-4">
-        <!-- Tarjeta 1 -->
-        <div class="col-md-4">
-          <div class="card h-100 bg-[#0f0f13] border border-white/10 text-white rounded-2xl p-2 transition-all duration-300 hover:-translate-y-2 hover:border-amber-500/50 hover:shadow-2xl hover:shadow-amber-500/10 group">
+        <!-- Card 1 -->
+        <div class="col-md-4 reveal" style="transition-delay: 0.08s;">
+          <div class="card h-100 service-card text-white rounded-2xl">
+            <div class="overflow-hidden rounded-top-2xl">
+              <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&q=80" 
+                   alt="Zona de musculación y fuerza" 
+                   class="service-img">
+            </div>
             <div class="card-body p-4 d-flex flex-column">
-              <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-4 fw-bold fs-5 group-hover:bg-amber-500 group-hover:text-black transition-all duration-300">01</div>
-              <h3 class="h4 fw-bold text-white mb-3">Musculación y Fuerza</h3>
-              <p class="text-gray-400 flex-grow-1 small lh-base">Plataformas olímpicas de absorción de impacto, barras calibradas y mancuernas de alta densidad hasta 100 lb.</p>
-              <div class="pt-4 mt-auto border-t border-white/5">
-                <a href="#inscripcion" class="text-amber-400 fw-semibold text-decoration-none d-inline-flex align-items-center gap-2 hover:text-amber-300 transition-colors">
-                  Reservar Zona <span class="transition-transform group-hover:translate-x-1">→</span>
+              <div class="service-number w-11 h-11 rounded-xl bg-amber-500/10 border border-amber-500/20 d-flex align-items-center justify-content-center text-amber-400 mb-3 fw-bold">01</div>
+              <h3 class="h5 fw-bold text-white mb-2">Musculación y Fuerza</h3>
+              <p class="text-gray-400 flex-grow-1 small lh-base mb-0">Plataformas olímpicas de absorción de impacto, barras calibradas y mancuernas de alta densidad hasta 100 lb.</p>
+              <div class="pt-3 mt-auto border-t border-white/6">
+                <a href="#inscripcion" class="service-link text-amber-400 fw-semibold text-decoration-none d-inline-flex align-items-center gap-2 hover:text-amber-300">
+                  Reservar Zona <span class="transition-transform duration-300">→</span>
                 </a>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Tarjeta 2 -->
-        <div class="col-md-4">
-          <div class="card h-100 bg-[#0f0f13] border border-white/10 text-white rounded-2xl p-2 transition-all duration-300 hover:-translate-y-2 hover:border-amber-500/50 hover:shadow-2xl hover:shadow-amber-500/10 group">
+        <!-- Card 2 -->
+        <div class="col-md-4 reveal" style="transition-delay: 0.16s;">
+          <div class="card h-100 service-card text-white rounded-2xl">
+            <div class="overflow-hidden rounded-top-2xl">
+              <img src="https://images.unsplash.com/photo-1576678927484-cc907957088c?auto=format&fit=crop&w=800&q=80" 
+                   alt="Zona de cardio y condición" 
+                   class="service-img">
+            </div>
             <div class="card-body p-4 d-flex flex-column">
-              <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-4 fw-bold fs-5 group-hover:bg-amber-500 group-hover:text-black transition-all duration-300">02</div>
-              <h3 class="h4 fw-bold text-white mb-3">Cardio & Condición</h3>
-              <p class="text-gray-400 flex-grow-1 small lh-base">Trotadoras inteligentes con simulación de pendientes, elípticas ergonómicas y remos concept con pantalla LED interactiva.</p>
-              <div class="pt-4 mt-auto border-t border-white/5">
-                <a href="#inscripcion" class="text-amber-400 fw-semibold text-decoration-none d-inline-flex align-items-center gap-2 hover:text-amber-300 transition-colors">
-                  Ver Programas <span class="transition-transform group-hover:translate-x-1">→</span>
+              <div class="service-number w-11 h-11 rounded-xl bg-amber-500/10 border border-amber-500/20 d-flex align-items-center justify-content-center text-amber-400 mb-3 fw-bold">02</div>
+              <h3 class="h5 fw-bold text-white mb-2">Cardio & Condición</h3>
+              <p class="text-gray-400 flex-grow-1 small lh-base mb-0">Trotadoras inteligentes con simulación de pendientes, elípticas ergonómicas y remos concept con pantalla LED interactiva.</p>
+              <div class="pt-3 mt-auto border-t border-white/6">
+                <a href="#inscripcion" class="service-link text-amber-400 fw-semibold text-decoration-none d-inline-flex align-items-center gap-2 hover:text-amber-300">
+                  Ver Programas <span class="transition-transform duration-300">→</span>
                 </a>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Tarjeta 3 -->
-        <div class="col-md-4">
-          <div class="card h-100 bg-[#0f0f13] border border-white/10 text-white rounded-2xl p-2 transition-all duration-300 hover:-translate-y-2 hover:border-amber-500/50 hover:shadow-2xl hover:shadow-amber-500/10 group">
+        <!-- Card 3 -->
+        <div class="col-md-4 reveal" style="transition-delay: 0.24s;">
+          <div class="card h-100 service-card text-white rounded-2xl">
+            <div class="overflow-hidden rounded-top-2xl">
+              <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=800&q=80" 
+                   alt="Asesoría biométrica y coaching" 
+                   class="service-img">
+            </div>
             <div class="card-body p-4 d-flex flex-column">
-              <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-4 fw-bold fs-5 group-hover:bg-amber-500 group-hover:text-black transition-all duration-300">03</div>
-              <h3 class="h4 fw-bold text-white mb-3">Asesoría Biométrica</h3>
-              <p class="text-gray-400 flex-grow-1 small lh-base">Evaluación corporal por bioimpedancia, seguimiento de composición muscular y calibración de rutinas con entrenadores certificados.</p>
-              <div class="pt-4 mt-auto border-t border-white/5">
-                <a href="#inscripcion" class="text-amber-400 fw-semibold text-decoration-none d-inline-flex align-items-center gap-2 hover:text-amber-300 transition-colors">
-                  Consultar Co-Coach <span class="transition-transform group-hover:translate-x-1">→</span>
+              <div class="service-number w-11 h-11 rounded-xl bg-amber-500/10 border border-amber-500/20 d-flex align-items-center justify-content-center text-amber-400 mb-3 fw-bold">03</div>
+              <h3 class="h5 fw-bold text-white mb-2">Asesoría Biométrica</h3>
+              <p class="text-gray-400 flex-grow-1 small lh-base mb-0">Evaluación corporal por bioimpedancia, seguimiento de composición muscular y calibración de rutinas con entrenadores certificados.</p>
+              <div class="pt-3 mt-auto border-t border-white/6">
+                <a href="#inscripcion" class="service-link text-amber-400 fw-semibold text-decoration-none d-inline-flex align-items-center gap-2 hover:text-amber-300">
+                  Consultar Co-Coach <span class="transition-transform duration-300">→</span>
                 </a>
               </div>
             </div>
@@ -189,43 +443,40 @@
     </div>
   </section>
 
-  <!-- PASO 5: Formulario Profesional A1 con Accesibilidad y Validación UI -->
-  <section id="inscripcion" class="py-24 bg-[#0a0a0e] relative border-t border-white/5">
-    <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-amber-500/5 blur-[150px] rounded-full pointer-events-none"></div>
+  <!-- Inscripción -->
+  <section id="inscripcion" class="section-tight relative border-t border-white/5">
+    <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-amber-500/5 blur-[120px] rounded-full pointer-events-none"></div>
 
-    <div class="container py-4 relative z-10">
+    <div class="container relative z-10">
       <div class="row justify-content-center">
         <div class="col-lg-7 col-md-9">
           
-          <div class="text-center mb-12">
+          <div class="text-center mb-8 reveal">
             <span class="text-amber-400 font-semibold tracking-widest text-xs uppercase bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/20">Inscripción Abierta</span>
-            <h2 class="fw-bold display-5 text-white tracking-tight mt-3">Activa Tu Membresía</h2>
-            <p class="text-gray-400 mt-2 fs-6">Completa tus credenciales para registrarte formalmente en el sistema PowerGym OTI.</p>
+            <h2 class="fw-bold display-5 text-white tracking-tight mt-3" style="letter-spacing: -0.025em;">Activa Tu Membresía</h2>
+            <p class="text-gray-400 mt-2 fs-6 mb-0">Completa tus credenciales para registrarte formalmente en el sistema PowerGym OTI.</p>
           </div>
 
-          <form class="needs-validation p-4 p-md-5 rounded-3 bg-[#0f0f13] border border-white/10 shadow-2xl" novalidate>
-            <!-- Campo Nombre Completo -->
-            <div class="mb-4">
-              <label for="nombreCompleto" class="form-label text-gray-300 fw-medium small mb-2">Nombre Completo</label>
-              <input type="text" class="form-control bg-[#070709] text-white border-white/10 py-3 px-4 rounded-xl focus:bg-[#070709] focus:text-white focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 shadow-none transition-all" id="nombreCompleto" aria-describedby="nombreHelp nombreFeedback" placeholder="Ej. Joshua Álvarez" required>
-              <div id="nombreHelp" class="form-text text-gray-500 fs-7 mt-1.5">Ingresa tu nombre y apellido según tu documento oficial.</div>
+          <form class="needs-validation form-premium p-4 p-md-5 rounded-3 reveal" novalidate style="transition-delay: 0.1s;">
+            <div class="mb-3">
+              <label for="nombreCompleto" class="form-label text-gray-300 fw-medium small mb-1.5">Nombre Completo</label>
+              <input type="text" class="form-control py-2.5 px-4 rounded-xl shadow-none" id="nombreCompleto" aria-describedby="nombreHelp nombreFeedback" placeholder="Ej. Piero Garcia" required>
+              <div id="nombreHelp" class="form-text text-gray-500 fs-7 mt-1">Ingresa tu nombre y apellido según tu documento oficial.</div>
               <div id="nombreFeedback" class="invalid-feedback text-amber-400 small mt-1">Por favor, introduce un nombre válido.</div>
               <div class="valid-feedback text-emerald-400 small mt-1">¡Campo verificado correctamente!</div>
             </div>
 
-            <!-- Campo Correo Electrónico -->
-            <div class="mb-4">
-              <label for="correoElectronico" class="form-label text-gray-300 fw-medium small mb-2">Correo Electrónico Institucional / Personal</label>
-              <input type="email" class="form-control bg-[#070709] text-white border-white/10 py-3 px-4 rounded-xl focus:bg-[#070709] focus:text-white focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 shadow-none transition-all" id="correoElectronico" aria-describedby="correoHelp correoFeedback" placeholder="usuario@correo.com" required>
-              <div id="correoHelp" class="form-text text-gray-500 fs-7 mt-1.5">Utilizaremos este medio para enviar tu acceso y código QR.</div>
+            <div class="mb-3">
+              <label for="correoElectronico" class="form-label text-gray-300 fw-medium small mb-1.5">Correo Electrónico Institucional / Personal</label>
+              <input type="email" class="form-control py-2.5 px-4 rounded-xl shadow-none" id="correoElectronico" aria-describedby="correoHelp correoFeedback" placeholder="usuario@correo.com" required>
+              <div id="correoHelp" class="form-text text-gray-500 fs-7 mt-1">Utilizaremos este medio para enviar tu acceso y código QR.</div>
               <div id="correoFeedback" class="invalid-feedback text-amber-400 small mt-1">Introduce una dirección de correo con formato correcto.</div>
               <div class="valid-feedback text-emerald-400 small mt-1">¡Correo electrónico válido!</div>
             </div>
 
-            <!-- Selección de Membresía -->
-            <div class="mb-4">
-              <label for="tipoMembresia" class="form-label text-gray-300 fw-medium small mb-2">Selecciona tu Plan de Membresía</label>
-              <select class="form-select bg-[#070709] text-white border-white/10 py-3 px-4 rounded-xl focus:bg-[#070709] focus:text-white focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 shadow-none transition-all" id="tipoMembresia" aria-describedby="membresiaFeedback" required>
+            <div class="mb-3">
+              <label for="tipoMembresia" class="form-label text-gray-300 fw-medium small mb-1.5">Selecciona tu Plan de Membresía</label>
+              <select class="form-select py-2.5 px-4 rounded-xl shadow-none" id="tipoMembresia" aria-describedby="membresiaFeedback" required>
                 <option selected disabled value="">Elige una opción de membresía...</option>
                 <option value="basico">Plan Básico - Acceso a Musculación</option>
                 <option value="intermedio">Plan Full Fitness - Musculación + Cardio</option>
@@ -235,16 +486,14 @@
               <div class="valid-feedback text-emerald-400 small mt-1">¡Plan seleccionado de forma exitosa!</div>
             </div>
 
-            <!-- Objetivos o Lesiones Previas -->
-            <div class="mb-5">
-              <label for="objetivosEntrenamiento" class="form-label text-gray-300 fw-medium small mb-2">Objetivos Específicos o Lesiones Previas (Opcional)</label>
-              <textarea class="form-control bg-[#070709] text-white border-white/10 py-3 px-4 rounded-xl focus:bg-[#070709] focus:text-white focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 shadow-none transition-all" id="objetivosEntrenamiento" rows="3" aria-describedby="objetivosHelp" placeholder="Cuéntanos brevemente qué meta física buscas alcanzar..."></textarea>
-              <div id="objetivosHelp" class="form-text text-gray-500 fs-7 mt-1.5">Información confidencial para optimizar tu inducción inicial.</div>
+            <div class="mb-4">
+              <label for="objetivosEntrenamiento" class="form-label text-gray-300 fw-medium small mb-1.5">Objetivos Específicos o Lesiones Previas (Opcional)</label>
+              <textarea class="form-control py-2.5 px-4 rounded-xl shadow-none" id="objetivosEntrenamiento" rows="3" aria-describedby="objetivosHelp" placeholder="Cuéntanos brevemente qué meta física buscas alcanzar..."></textarea>
+              <div id="objetivosHelp" class="form-text text-gray-500 fs-7 mt-1">Información confidencial para optimizar tu inducción inicial.</div>
             </div>
 
-            <!-- Botón de Envío -->
             <div class="d-grid">
-              <button type="submit" class="btn bg-amber-500 hover:bg-amber-400 text-black fw-bold py-3.5 rounded-xl shadow-lg shadow-amber-500/20 transition-all duration-300 hover:scale-[1.01] border-0 text-base">
+              <button type="submit" class="btn btn-primary-premium fw-bold py-3 rounded-xl shadow-lg shadow-amber-500/25 text-base">
                 Confirmar y Registrar Inscripción
               </button>
             </div>
@@ -255,33 +504,56 @@
     </div>
   </section>
 
-  <!-- Footer Minimalista A1 -->
-  <footer class="py-5 bg-[#050507] border-t border-white/15 text-center text-gray-500 text-sm">
+  <!-- Footer -->
+  <footer class="py-4 border-t border-white/10 text-center text-gray-500 text-sm">
     <div class="container">
       <p class="mb-1 text-gray-400 fw-medium">PowerGym OTI &mdash; Oficina de Tecnologías de la Información</p>
       <p class="mb-0 text-xs text-gray-600">Desarrollado bajo estándares de alto rendimiento UI/UX. Todos los derechos reservados.</p>
     </div>
   </footer>
 
-  <!-- Bootstrap JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   
-  <!-- Script de validación de Bootstrap -->
   <script>
     (function () {
-      'use strict'
-      var forms = document.querySelectorAll('.needs-validation')
-      Array.prototype.slice.call(forms)
-        .forEach(function (form) {
-          form.addEventListener('submit', function (event) {
-            if (!form.checkValidity()) {
-              event.preventDefault()
-              event.stopPropagation()
-            }
-            form.classList.add('was-validated')
-          }, false)
-        })
-    })()
+      'use strict';
+
+      var forms = document.querySelectorAll('.needs-validation');
+      Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+
+      var nav = document.querySelector('.navbar-premium');
+      function onScroll() {
+        if (window.scrollY > 40) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      var reveals = document.querySelectorAll('.reveal');
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+
+      reveals.forEach(function (el) {
+        observer.observe(el);
+      });
+    })();
   </script>
 </body>
 </html>
